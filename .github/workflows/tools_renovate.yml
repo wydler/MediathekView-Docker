@@ -1,9 +1,9 @@
 ---
-name: Renovate
+name: Tools - Renovate
 
 "on":
   schedule:
-    - cron: "0 3  * * 6"
+    - cron: "0 6 * * *"  # jeden Tag um 06:00 Uhr
   workflow_dispatch:
     inputs:
       logLevel:
@@ -18,11 +18,11 @@ name: Renovate
 permissions:
   contents: write
   pull-requests: write
+  issues: write
 
 
 jobs:
   renovate:
-    name: Renovate
     runs-on: ubuntu-latest
 
     steps:
@@ -37,12 +37,12 @@ jobs:
         uses: renovatebot/github-action@f66d8679fcfcfa051abde6e7a623007173bf5164  # v46.1.12
         with:
           token: ${{ steps.generate-token.outputs.token }}
+          # token: ${{ secrets.GH_TOKEN }}
         env:
-          # Fallback auf info, falls inputs.logLevel leer/undefiniert ist
           LOG_LEVEL: ${{ inputs.logLevel || 'info' }}
           # Repository taken from variable to keep configuration file generic
           RENOVATE_REPOSITORIES: ${{ github.repository }}
           # This flag will stop renovate from trying to create an onboarding PR, instead it will look for renovate.json file and run
           RENOVATE_ONBOARDING: "false"
-          # Close dependency dashboard issue automatically once no upgrades are pending
           RENOVATE_DEPENDENCY_DASHBOARD_AUTOCLOSE: "true"
+          RENOVATE_DEPENDENCY_DASHBOARD_TITLE: "Renovate Dependency Dashboard"
