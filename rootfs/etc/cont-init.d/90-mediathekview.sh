@@ -39,7 +39,7 @@ fi
 
 # Setze das Home-Verzeichnis des Users "app" von /dev/null auf /output,
 # damit der Benutzer ein gültiges Home-Verzeichnis im Volume erhält
-usermod -d /output/ app
+sed -i '/^app:/ s|/dev/null|/output/|' /etc/passwd
 
 #
 # Rechte setzen
