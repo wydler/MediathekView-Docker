@@ -101,7 +101,8 @@ RUN add-pkg \
     procps \
     libnotify4 \
     libxtst6 \
-    xmlstarlet
+    xmlstarlet \
+    libgtk-3-0
 
 # ----------------------------------------
 # Generiere die en_US.UTF-8 Locale, damit UTF-8 Zeichen korrekt unterstützt werden
