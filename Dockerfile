@@ -48,7 +48,7 @@ RUN mkdir -p /opt/MediathekView \
 # ----------------------------------------
 # Stage 2: Runtime
 # ----------------------------------------
-FROM jlesage/baseimage-gui:debian-13-v4.11.3@sha256:a9dc8f37a5d0e7ca9246a1d1ac4c30b4aa5d515372af16057cfb62ed0254056f
+FROM jlesage/baseimage-gui:debian-13-v4.12.2@sha256:92bf7e73c77787218aeffae86be5ff8ef3eb28ee1d62f093f9717c529a2958ab
 
 # Build-Argument
 ARG APP_VERSION
@@ -92,8 +92,7 @@ COPY --from=builder /opt/MediathekView /opt/MediathekView
 # Installiere nur die Runtime-Pakete
 # VLC, FFmpeg, flvstreamer und procps werden für die App benötigt
 # ----------------------------------------
-RUN apt-get update \
- && apt-get install -y --no-install-recommends \
+RUN add-pkg \
     locales \
     vlc \
     ca-certificates \
@@ -103,7 +102,7 @@ RUN apt-get update \
     libnotify4 \
     libxtst6 \
     xmlstarlet \
- && rm -rf /var/lib/apt/lists/*
+    libgtk-3-0
 
 # ----------------------------------------
 # Generiere die en_US.UTF-8 Locale, damit UTF-8 Zeichen korrekt unterstützt werden
