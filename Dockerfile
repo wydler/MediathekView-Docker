@@ -92,8 +92,7 @@ COPY --from=builder /opt/MediathekView /opt/MediathekView
 # Installiere nur die Runtime-Pakete
 # VLC, FFmpeg, flvstreamer und procps werden für die App benötigt
 # ----------------------------------------
-RUN apt-get update \
- && apt-get install -y --no-install-recommends \
+RUN add-pkg \
     locales \
     vlc \
     ca-certificates \
@@ -102,8 +101,7 @@ RUN apt-get update \
     procps \
     libnotify4 \
     libxtst6 \
-    xmlstarlet \
- && rm -rf /var/lib/apt/lists/*
+    xmlstarlet
 
 # ----------------------------------------
 # Generiere die en_US.UTF-8 Locale, damit UTF-8 Zeichen korrekt unterstützt werden
