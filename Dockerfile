@@ -48,7 +48,7 @@ RUN mkdir -p /opt/MediathekView \
 # ----------------------------------------
 # Stage 2: Runtime
 # ----------------------------------------
-FROM jlesage/baseimage-gui:debian-13-v4.12.2@sha256:92bf7e73c77787218aeffae86be5ff8ef3eb28ee1d62f093f9717c529a2958ab
+FROM jlesage/baseimage-gui:debian-13-v4.12.3@sha256:5322873f27e8049e88ece1c4ad9769a65a1aaefce85afaf16b9d01f5cc8fcc12
 
 # Build-Argument
 ARG APP_VERSION
