@@ -91,7 +91,7 @@ jobs:
 
       - name: Build and push
         uses: docker/build-push-action@53b7df96c91f9c12dcc8a07bcb9ccacbed38856a  # v7.3.0
-        id: build        
+        id: build
         with:
           context: .
           file: ./Dockerfile
@@ -108,13 +108,13 @@ jobs:
         uses: sigstore/cosign-installer@6f9f17788090df1f26f669e9d70d6ae9567deba6  # v4.1.2
 
       - name: Show Cosign version
-        shell: bash      
+        shell: bash
         run: |
           cosign version
 
       - name: Sign docker image with a key
         shell: bash
-        run: |                
+        run: |
           cosign sign \
             --verbose \
             --new-bundle-format=true \
@@ -166,4 +166,3 @@ jobs:
           docker buildx imagetools create \
             -t ${{ env.REGISTRY_ACCOUNT }}/${{ env.REGISTRY_REPO }}:latest \
             ${{ steps.tags.outputs.docker }}
-            
