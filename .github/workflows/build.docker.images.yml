@@ -116,6 +116,7 @@ jobs:
         shell: bash
         run: |                
           cosign sign \
+            --verbose \
             --new-bundle-format=true \
             --use-signing-config=false \
             --yes \
