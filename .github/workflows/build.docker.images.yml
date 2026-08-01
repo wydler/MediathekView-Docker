@@ -158,7 +158,7 @@ jobs:
 
 
       - name: Promote image to latest
-        if: github.event.release.tag_name != ''
+        if: github.event.release.prerelease == false && github.event.release.draft == false
         shell: bash
         run: |
           # Create or update the "latest" tag to point to the newly released image version.
