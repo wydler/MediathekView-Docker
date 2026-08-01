@@ -72,7 +72,7 @@ jobs:
             echo "docker=${{ env.REGISTRY_ACCOUNT }}/${{ env.REGISTRY_REPO }}:$container_tag" >> $GITHUB_OUTPUT
             echo "docker_image_version=${{ github.ref_name }}" >> $GITHUB_OUTPUT
           elif [ ! -z "${{ github.event.release.tag_name }}" ]; then
-            echo "docker=${{ env.REGISTRY_ACCOUNT }}/${{ env.REGISTRY_REPO }}:latest, ${{ env.REGISTRY_ACCOUNT }}/${{ env.REGISTRY_REPO }}:${{ github.event.release.tag_name }}" >> $GITHUB_OUTPUT
+            echo "docker=${{ env.REGISTRY_ACCOUNT }}/${{ env.REGISTRY_REPO }}:${{ github.event.release.tag_name }}" >> $GITHUB_OUTPUT
             echo "docker_image_version=${{ github.event.release.tag_name }}" >> $GITHUB_OUTPUT
           else
             echo "docker=${{ env.REGISTRY_ACCOUNT }}/${{ env.REGISTRY_REPO }}:$container_tag" >> $GITHUB_OUTPUT
