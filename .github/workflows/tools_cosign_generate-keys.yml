@@ -77,9 +77,9 @@ jobs:
       - name: Create branch
         uses: peterjgrainger/action-create-branch@10c7d268152480ae859347db45dc69086cef1d9c
         env:
-           GITHUB_TOKEN: "${{ steps.generate-token.outputs.token }}"
+          GITHUB_TOKEN: "${{ steps.generate-token.outputs.token }}"
         with:
-           branch: "${{ steps.branch.outputs.name }}"
+          branch: "${{ steps.branch.outputs.name }}"
 
 
   gen-keys:
