@@ -25,7 +25,7 @@ jobs:
 
       - name: Checkout the current branch
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
-  
+
       - name: "Check if keys exist and should be regenerated"
         env:
           GH_TOKEN: "${{ steps.generate-token.outputs.token }}"
@@ -35,7 +35,7 @@ jobs:
             echo 'Secret mit dem Namen "cosign_gh_token" im Repository nicht gefunden.'
             exit 1
           fi
-      
+
           if [[ "$COSIGN_OVERWRITE" == "0" ]]; then
             if gh secret list | grep -q "COSIGN_PASSWORD" &&
                gh secret list | grep -q "COSIGN_PRIVATE_KEY" &&
@@ -50,16 +50,16 @@ jobs:
   create-branch:
     name: Create working branch
     runs-on: ubuntu-slim
-   
+
     needs:
       - check-requires
-   
+
     outputs:
       name: ${{ steps.branch.outputs.name }}
-   
+
     permissions:
       contents: write
-   
+
     steps:
       - name: Generate app token
         uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1  # v3.2.0
@@ -117,7 +117,7 @@ jobs:
         run: |
           cosign generate-key-pair github://${{ github.repository }}
 
-      - name: "Set the variable 'COSIGN_OVERWRITE' to '0'." 
+      - name: "Set the variable 'COSIGN_OVERWRITE' to '0'."
         run: |
           gh variable set COSIGN_OVERWRITE --body "0"
         env:
@@ -145,7 +145,7 @@ jobs:
 
 
   cleanup-on-failure:
-    name: "Cleanup on failure"  
+    name: "Cleanup on failure"
     runs-on: ubuntu-slim
     if: ${{ failure() || cancelled() }}
 
@@ -170,13 +170,13 @@ jobs:
           GH_TOKEN: "${{ steps.generate-token.outputs.token }}"
         run: |
           BRANCH="${{ needs.create-branch.outputs.name }}"
-      
+
           if gh api "repos/${{ github.repository }}/git/ref/heads/${BRANCH}" > /dev/null 2>&1; then
             echo "exists=true" >> "$GITHUB_OUTPUT"
           else
             echo "exists=false" >> "$GITHUB_OUTPUT"
           fi
-          
+
       - name: Delete previously created branch
         if: steps.check_branch.outputs.exists == 'true'
         uses: dawidd6/action-delete-branch@d1efac9a6f7a9b408d4e8ff663a99c1fbac17b3f  # v3.1.0
