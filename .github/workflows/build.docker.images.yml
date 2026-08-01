@@ -120,7 +120,7 @@ jobs:
             --new-bundle-format=true \
             --use-signing-config=false \
             --yes \
-            --key env://COSIGN_PRIVATE_KEY ${{ env.REGISTRY }}/${{ steps.tags.outputs.docker }}:@${{ steps.build.outputs.digest }}
+            --key env://COSIGN_PRIVATE_KEY ${{ env.REGISTRY }}/${{ steps.tags.outputs.docker }}@${{ steps.build.outputs.digest }}
         env:
           COSIGN_PRIVATE_KEY: ${{ secrets.cosign_private_key }}
           COSIGN_PASSWORD: ${{ secrets.cosign_password }}
@@ -130,7 +130,7 @@ jobs:
         run: |
           set -euo pipefail
 
-          IMAGE="${{ env.REGISTRY }}/${{ steps.tags.outputs.docker }}:@${{ steps.build.outputs.digest }}"
+          IMAGE="${{ env.REGISTRY }}/${{ steps.tags.outputs.docker }}@${{ steps.build.outputs.digest }}"
 
           for i in {1..12}; do
             echo "Verification attempt ${i}/12..."
@@ -154,7 +154,7 @@ jobs:
       - name: Show Cosign artifact tree
         shell: bash
         run: |
-          cosign tree ${{ env.REGISTRY }}/${{ steps.tags.outputs.docker }}:@${{ steps.build.outputs.digest }}
+          cosign tree ${{ env.REGISTRY }}/${{ steps.tags.outputs.docker }}@${{ steps.build.outputs.digest }}
 
 
       - name: Promote image to latest
