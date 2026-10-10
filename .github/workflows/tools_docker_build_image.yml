@@ -8,6 +8,7 @@ name: Tools - Docker Build Test
       - "master"
     paths:
       - '**Dockerfile'
+      - '**mediathekview.version'
 
 permissions:
   contents: read
