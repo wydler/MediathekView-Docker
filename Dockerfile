@@ -102,7 +102,8 @@ RUN add-pkg \
     libnotify4 \
     libxtst6 \
     xmlstarlet \
-    libgtk-3-0
+    libgtk-3-0 \
+    sqlite3
 
 # ----------------------------------------
 # Generiere die en_US.UTF-8 Locale, damit UTF-8 Zeichen korrekt unterstützt werden
