@@ -37,6 +37,18 @@ This is a port to a Docker container. The container is based on the project [doc
 6. Editing `/opt/containers/mediathekview/docker-compose.yml` and set your parameters (e.g., specify an explicit tag, public port, etc.).
 7. Starting application with `docker compose -f /opt/containers/mediathekview/docker-compose.yml up -d`.
 8. Don't forget to test, that the application works successfully (e.g. http://FQDN:5800/).
+
+
+## Click'n'Load with JDownloader
+
+To send Click'n'Load links from MediathekView to JDownloader (both running in Docker), configure JDownloader to accept connections from outside its container:
+
+1. In JDownloader, open **Settings** > **Advanced Settings**, search for **FlashGot**, and disable **will listen on localhost only**. Restart JDownloader.
+2. Publish port `9666` from the JDownloader container on the Docker host. The `docker-compose.yml.example` in this repository also publishes `9666:9666` for MediathekView's Click'n'Load integration; that mapping does not publish the port of a separate JDownloader container.
+
+These changes allow Click'n'Load requests to reach JDownloader. See the [original discussion](https://github.com/jlesage/docker-jdownloader-2/issues/7#issuecomment-612426333).
+
+
 ## Update Repo and docker image
 
 1. Update Git Repository to latest release:
